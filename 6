@@ -1,0 +1,31 @@
+def calculator():
+    history = []
+    while True:
+        cmd = input("\n> ").strip().lower()
+        if cmd == 'quit': break
+        if cmd == 'history':
+            print("\n".join(history) if history else "Історія порожня")
+            continue
+            
+        try:
+            parts = cmd.split()
+            if len(parts) != 3: continue
+            
+            n1, op, n2 = float(parts[0]), parts[1], float(parts[2])
+            
+            if op == '+': res = n1 + n2
+            elif op == '-': res = n1 - n2
+            elif op == '*': res = n1 * n2
+            elif op == '/' and n2 != 0: res = n1 / n2
+            elif op == '**': res = n1 ** n2
+            else: 
+                print("Помилка (оператор або ділення на 0)"); continue
+                
+            entry = f"{n1} {op} {n2} = {res}"
+            print(entry)
+            history.append(entry)
+        except Exception:
+            print("Некоректне введення")
+
+if __name__ == "__main__":
+    calculator()
